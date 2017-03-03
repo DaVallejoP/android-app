@@ -1,6 +1,10 @@
 node('android') {
     stage('Build') {
-        sh "./gradlew app:assembleMockDebug"
+          // Checkout code from repository and update any submodules
+          checkout scm
+          sh 'git submodule update --init'  
+          //build your gradle flavor, passes the current build number as a parameter to gradle
+          sh "./gradlew clean assembleMockDebug"
     }
     stage('Test'){
       parallel (
