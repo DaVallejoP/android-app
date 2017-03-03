@@ -1,5 +1,5 @@
 node('android') {
-    stage "Build" {
+    stage('Build') {
         sh "gradlew app:assembleMockDebug"
     }
     stage('Test'){
