@@ -1,6 +1,6 @@
-node('master') {
-    stage('Build') {
-        sh "echo Build"
+node('android') {
+    stage "Build" {
+        sh "gradlew app:assembleMockDebug"
     }
     stage('Test'){
       parallel (
