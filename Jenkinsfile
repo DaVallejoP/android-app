@@ -1,6 +1,6 @@
 node('android') {
     stage('Build') {
-        sh "gradlew app:assembleMockDebug"
+        sh "./gradlew app:assembleMockDebug"
     }
     stage('Test'){
       parallel (
