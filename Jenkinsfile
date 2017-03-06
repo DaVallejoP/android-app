@@ -5,6 +5,7 @@ node('android') {
           sh 'git submodule update --init'  
           //build your gradle flavor, passes the current build number as a parameter to gradle
           sh "./gradlew clean assembleMockDebug"
+          
     }
     stage('Test'){
       parallel (
