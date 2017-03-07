@@ -1,52 +1,77 @@
 node {
-    stage('Build') {
+    stage('Checkotut') {
           // Checkout code from repository and update any submodules
           checkout scm
           sh 'git submodule update --init'  
           //build your gradle flavor, passes the current build number as a parameter to gradle
           //sh "./gradlew clean assembleMockDebug"
-          sleep(5,SECONDS)
+          sh "sleep 5s"
           
     }
-    stage('Test'){
+    stage('Build'){
       parallel (
-        "JUnit": {
-            sh "echo JUnit"
-            sleep(2,SECONDS)
+        "Compile & Package": {
+            sh "echo Compile & Package"
+            sh "sleep 2s"
         },
-        "DBUnit": {
-            sh "echo DBUnit"
-            sleep(4,SECONDS)
+        "Run Unit Test": {
+            sh "echo Run Unit Test"
+            sh "sleep 4s"
         },
-        "Jasmine": {
-            sh "echo Jasmine"
-            sleep(3,SECONDS)
+        "Static Code Analisys": {
+            sh "Static Code Analisys"
+            sh "sleep 3s"
         },
       )
     }
-    stage('Browser Tests'){
+    stage('Create ST Env'){
+        sh "echo Create ST Env"
+        sh "sleep 3s"
+    }
+    stage('Deploy Code'){
+        sh "echo Deploy Code"
+        sh "sleep 5s"
+    }
+    stage('Load Test data'){
+        sh "Load Test data"
+        sh "sleep 5s"
+    }
+    stage('Run Test '){
+        sh "echo Run Test"
+        sh "sleep 5s"
+    }
+
+    stage('Create ST Env'){
       parallel (
-        "Firefox": {
-            sh "echo Firefox"
+        "Create clustered Env": {
+            sh "echo Create clustered Env"
         },
-        "Edge": {
-            sh "echo Edge"
-        },
-        "Safari": {
-            sh "echo Safari"
-        },
-        "Chrome": {
-            sh "echo Chrome"
+        "Tear Down ST env": {
+            sh "echo Tear Down ST env"
         },
       )
     }
-    stage('Dev'){
-        sh "echo Dev"
+    stage('Deploy Code'){
+        sh "echo Deploy Code"
     }
-    stage('Staging'){
-        sh "echo Staging"
+    stage('ST Test'){
+      parallel (
+        "Run Perf Test": {
+            sh "echo Run Perf Test"
+            sh "sleep 2s"
+        },
+        "Run Security Test": {
+            sh "echo Run Security Test"
+            sh "sleep 4s"
+        },
+        "Run Ops Test": {
+            sh "echo Run Ops Test"
+            sh "sleep 3s"
+        },
+      )
     }
-    stage('Production'){
-        sh "echo Production"
+    stage('Prod Deploy'){
+        sh "Prod Deploy"
     }
+
 }
