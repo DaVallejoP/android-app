@@ -11,7 +11,7 @@ node {
     stage('Build'){
       parallel (
         "Compile & Package": {
-            sh "echo Compile & Package"
+            sh "echo Compile and Package"
             sh "sleep 2s"
         },
         "Run Unit Test": {
