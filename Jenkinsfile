@@ -19,7 +19,7 @@ node {
             sh "sleep 4s"
         },
         "Static Code Analisys": {
-            sh "Static Code Analisys"
+            sh "echo Static Code Analisys"
             sh "sleep 3s"
         },
       )
@@ -33,7 +33,7 @@ node {
         sh "sleep 5s"
     }
     stage('Load Test data'){
-        sh "Load Test data"
+        sh "echo Load Test data"
         sh "sleep 5s"
     }
     stage('Run Test '){
@@ -71,7 +71,7 @@ node {
       )
     }
     stage('Prod Deploy'){
-        sh "Prod Deploy"
+        sh "echo Prod Deploy"
     }
 
 }
