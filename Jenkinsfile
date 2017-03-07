@@ -1,4 +1,3 @@
-node('android') {
     stage('Build') {
           // Checkout code from repository and update any submodules
           checkout scm
@@ -49,4 +48,4 @@ node('android') {
     stage('Production'){
         sh "echo Production"
     }
-}
+
