@@ -4,19 +4,23 @@ node('android') {
           checkout scm
           sh 'git submodule update --init'  
           //build your gradle flavor, passes the current build number as a parameter to gradle
-          sh "./gradlew clean assembleMockDebug"
+          //sh "./gradlew clean assembleMockDebug"
+          sleep(5,SECONDS)
           
     }
     stage('Test'){
       parallel (
         "JUnit": {
             sh "echo JUnit"
+            sleep(2,SECONDS)
         },
         "DBUnit": {
             sh "echo DBUnit"
+            sleep(4,SECONDS)
         },
         "Jasmine": {
             sh "echo Jasmine"
+            sleep(3,SECONDS)
         },
       )
     }
