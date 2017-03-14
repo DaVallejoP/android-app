@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
-//apply plugin: 'jacoco-android'
+apply plugin: 'jacoco-android'
 apply plugin: 'jacoco'
+apply plugin: "org.sonarqube"
+//apply from: './jacoco.gradle'
+
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -54,20 +57,17 @@ android {
         }
     }
 
-    // Always show the result of every unit test, even if it passes.
-    testOptions.unitTests.all {
-        jacoco {
-            includeNoLocationClasses = true
-        }
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-        }
-    }
     lintOptions {
         xmlReport true
         abortOnError false
         //lintConfig rootProject.file('gradle/lint.xml')
     }
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled false
+    xml.enabled true
 }
 
 /*
